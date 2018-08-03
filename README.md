@@ -1,2 +1,2 @@
 # MyBicycle
-Just cms for MyWheel
+Just cms for MyWheel framework.
