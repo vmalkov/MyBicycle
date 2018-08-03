@@ -1,0 +1,26 @@
+{
+    "name": "MyBicycle",
+    "description": "Your project description",
+    "keywords": ["Your keyword", "Another keyword"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vadim Malkov",
+            "email": "your@email.com",
+            "role": "Creator / Main Developer"
+        }
+    ],
+    "require": {
+        "symfony/templating": "^3.2",
+        "gabordemooij/redbean": "dev-master",
+        "ptcong/easyrequest":"^1.0",
+        "league/flysystem":"^1.0",
+        "league/csv":"^8.0",
+        "panychek/moex":"dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "MyBicycle\\": ""
+        }
+    }
+}
