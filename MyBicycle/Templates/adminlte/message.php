@@ -1,0 +1,5 @@
+<?if($text):?>
+<div class="message-<?=$type?>">
+	<?= $text;?>
+</div>
+<?endif;?>
