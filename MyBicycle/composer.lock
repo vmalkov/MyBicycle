@@ -4,20 +4,65 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "029c4b2da11057b057e3be6c3956b6d3",
+    "content-hash": "802653a22769d02e74b7d0edadf43fb1",
     "packages": [
+        {
+            "name": "ezimuel/php-secure-session",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezimuel/PHP-Secure-Session.git",
+                "reference": "da686a3cff815a30c90202d90b9a43c5b491731a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezimuel/PHP-Secure-Session/zipball/da686a3cff815a30c90202d90b9a43c5b491731a",
+                "reference": "da686a3cff815a30c90202d90b9a43c5b491731a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-openssl": "*",
+                "paragonie/random_compat": "^2.0.2",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7.27"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPSecureSession\\": "src/"
+                },
+                "files": [
+                    "bin/register_secure_session.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Encrypt and authenticate PHP session data using AES-256 and HMAC-SHA256",
+            "homepage": "https://github.com/ezimuel/PHP-Secure-Session",
+            "keywords": [
+                "Authentication",
+                "encrypt",
+                "session"
+            ],
+            "time": "2018-02-01T13:38:40+00:00"
+        },
         {
             "name": "gabordemooij/redbean",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gabordemooij/redbean.git",
-                "reference": "20f6bd58d62f13ae811b615ab2788251205fd31d"
+                "reference": "f9ef56898a8afe1fd841853087e644e746550ffb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gabordemooij/redbean/zipball/20f6bd58d62f13ae811b615ab2788251205fd31d",
-                "reference": "20f6bd58d62f13ae811b615ab2788251205fd31d",
+                "url": "https://api.github.com/repos/gabordemooij/redbean/zipball/f9ef56898a8afe1fd841853087e644e746550ffb",
+                "reference": "f9ef56898a8afe1fd841853087e644e746550ffb",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +90,7 @@
             "keywords": [
                 "orm"
             ],
-            "time": "2018-07-01T09:51:03+00:00"
+            "time": "2018-07-25T16:05:52+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -375,12 +420,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/panychek/moex.git",
-                "reference": "2d2a926a1319b736302e2915b8943ff064a96481"
+                "reference": "bf602866f02dfcdbd16bb4c81511a0dd99a41426"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/panychek/moex/zipball/2d2a926a1319b736302e2915b8943ff064a96481",
-                "reference": "2d2a926a1319b736302e2915b8943ff064a96481",
+                "url": "https://api.github.com/repos/panychek/moex/zipball/bf602866f02dfcdbd16bb4c81511a0dd99a41426",
+                "reference": "bf602866f02dfcdbd16bb4c81511a0dd99a41426",
                 "shasum": ""
             },
             "require": {
@@ -413,7 +458,56 @@
                 "moex",
                 "moscow"
             ],
-            "time": "2018-05-01T22:49:57+00:00"
+            "time": "2018-07-29T12:18:37+00:00"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v2.0.17",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/29af24f25bab834fcbb38ad2a69fa93b867e070d",
+                "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/random.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "polyfill",
+                "pseudorandom",
+                "random"
+            ],
+            "time": "2018-07-04T16:31:37+00:00"
         },
         {
             "name": "psr/http-message",
@@ -516,25 +610,28 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.8.0",
+            "version": "v1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "7cc359f1b7b80fc25ed7796be7d96adc9b354bae"
+                "reference": "e3d826245268269cd66f8326bd8bc066687b4a19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/7cc359f1b7b80fc25ed7796be7d96adc9b354bae",
-                "reference": "7cc359f1b7b80fc25ed7796be7d96adc9b354bae",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e3d826245268269cd66f8326bd8bc066687b4a19",
+                "reference": "e3d826245268269cd66f8326bd8bc066687b4a19",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -567,20 +664,20 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2018-04-30T19:57:29+00:00"
+            "time": "2018-08-06T14:22:27+00:00"
         },
         {
             "name": "symfony/templating",
-            "version": "v3.4.12",
+            "version": "v3.4.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/templating.git",
-                "reference": "199a4199e48d68d10ce8ccaa0ee1ab06ef65a6e8"
+                "reference": "d8693ae4a45f8bb8eae5b1df89c00ec236c1e457"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/templating/zipball/199a4199e48d68d10ce8ccaa0ee1ab06ef65a6e8",
-                "reference": "199a4199e48d68d10ce8ccaa0ee1ab06ef65a6e8",
+                "url": "https://api.github.com/repos/symfony/templating/zipball/d8693ae4a45f8bb8eae5b1df89c00ec236c1e457",
+                "reference": "d8693ae4a45f8bb8eae5b1df89c00ec236c1e457",
                 "shasum": ""
             },
             "require": {
@@ -623,7 +720,7 @@
             ],
             "description": "Symfony Templating Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-01T22:53:27+00:00"
+            "time": "2018-07-26T11:19:56+00:00"
         }
     ],
     "packages-dev": [],

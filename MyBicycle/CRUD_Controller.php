@@ -2,44 +2,34 @@
 
 namespace MyBicycle;
 
-use MyBicycle\Templates\Renderer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use MyWheel\Config;
+use MyBicycle\Templates\Renderer;
+use FastRoute\RouteCollector;
 use RedBeanPHP\R as R;
-use RedBeanPHP\BeanHelper\SimpleFacadeBeanHelper as SimpleFacadeBeanHelper;
-
+use League\Container\Container;
 
 abstract class CRUD_Controller extends Controller {
-	function __construct(Request $request, Response $response, Config $config) {
+    static $permissions;
+
+	function __construct(Request $request, Response $response, Config $config, RouteCollector $routes, Container $container) {
 		
-        parent::__construct($request, $response, $config);
+        parent::__construct($request, $response, $config, $routes, $container);
 		
         $this->context = preg_replace(array('/Controller/','/'.addslashes($this->reflector->getNamespaceName()).'/','/\\\/'),'',
 			get_called_class());
 
-		
-        //это на период начальной разработки
-        R::setup();
-        
-        define( 'REDBEAN_MODEL_PREFIX', $this->reflector->getNamespaceName().'\\' );
-
-        SimpleFacadeBeanHelper::setFactoryFunction( function( $name ) {
-            $model = new $name();
-            return $model;
-        } );
-
         $this->{$this->context} = R::dispense($this->context);
+
 
 	}
 
 	function indexAction($params) {
         $this->{$this->context} = R::find($this->context);
 
-        foreach ($this->{$this->context} as $key=>$item) {
-            $this->data[$this->context][$key] = $item;
-            
-        }
+        $this->data[$this->context]=$this->{$this->context};
+
         $this->data['header'] = '__'.$this->ctrlName.'_index';
         $output = $this->renderer->render(
             $this->ctrlName.'/'.$this->ctrlName.'_index', $this->data
@@ -50,10 +40,8 @@ abstract class CRUD_Controller extends Controller {
     function readAction($params) {
         $this->{$this->context} = R::load($this->context,$params['id']);
 
-        foreach ($this->{$this->context} as $k => $v) {
-            $this->data[$k]=$v;
-        }
-        foreach($data as $field) $this->data[$field]=$this->{$this->context}->$field;
+        $this->data[$this->context]=$this->{$this->context};
+        
         $output = $this->renderer->render(
             $this->ctrlName.'/'.$this->ctrlName.'_read', $this->data
         );
@@ -95,9 +83,13 @@ abstract class CRUD_Controller extends Controller {
         $this->redirect($this->request->getBaseUrl()."/{$this->context}/");
     }
 
-    static function redirect($path,$msg=array()) {
-		//Session::S()->message=$msg;
+    function redirect($path,$msg=array()) {
+		if($msg) $this->session['message'] = $msg;
 		header("Location: ".$path);
 		exit;
 	}
+
+    static function setPermissions($permissions) {
+        self::$permissions = $permissions;
+    }
 } 

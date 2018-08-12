@@ -26,7 +26,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- jQuery 3 -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
-  <?if(!$this->user->allowed('admin')):?>
+  <?
+
+  if(!$this->user->allowed('admin/panel')):?>
   <style type="text/css">
     .content-wrapper, .main-footer {margin-left: 0;}
   </style>
@@ -65,7 +67,8 @@ desired effect
 -->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-  <?if($this->user->allowed('admin')):?>
+  <?
+  if($this->user->allowed('admin/panel')):?>
   <!-- Main Header -->
   <header class="main-header">
 
@@ -305,18 +308,18 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
-
+      <?= $message;?>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
       <?= $content;?>
-
+      <?= $blocks['right'];?>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 
-  <?if($this->user->allowed('admin')):?>
+  <?if($this->user->allowed('admin/panel')):?>
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
@@ -353,7 +356,7 @@ desired effect
           </li>
         </ul>
         <!-- /.control-sidebar-menu -->
-
+        
         <h3 class="control-sidebar-heading">Tasks Progress</h3>
         <ul class="control-sidebar-menu">
           <li>
