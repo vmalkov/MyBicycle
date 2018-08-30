@@ -13,6 +13,9 @@ use League\Container\Container;
 abstract class CRUD_Controller extends Controller {
     static $permissions;
 
+    protected $_limit, $_start, $_order, $_filter;
+
+
 	function __construct(Request $request, Response $response, Config $config, RouteCollector $routes, Container $container) {
 		
         parent::__construct($request, $response, $config, $routes, $container);
@@ -20,13 +23,13 @@ abstract class CRUD_Controller extends Controller {
         $this->context = preg_replace(array('/Controller/','/'.addslashes($this->reflector->getNamespaceName()).'/','/\\\/'),'',
 			get_called_class());
 
-        $this->{$this->context} = R::dispense($this->context);
-
 
 	}
 
 	function indexAction($params) {
-        $this->{$this->context} = R::find($this->context);
+        $this->_count = R::count($this->context, $this->getFilterQuery(), $this->getQueryParams());
+
+        $this->{$this->context} = R::findCollection($this->context, $this->getQuery(), $this->getQueryParams());
 
         $this->data[$this->context]=$this->{$this->context};
 
@@ -49,6 +52,7 @@ abstract class CRUD_Controller extends Controller {
     }
 
     function createAction() {
+        $this->{$this->context} = R::dispense($this->context);
         $this->data['header'] = '__'.$this->ctrlName.'_create';
         $this->form('create');
     }
@@ -91,5 +95,40 @@ abstract class CRUD_Controller extends Controller {
 
     static function setPermissions($permissions) {
         self::$permissions = $permissions;
+    }
+
+    function setPagination($limit,$start=0) {
+        if($start) {
+            $this->_start=$limit;
+            $this->_limit=$start;
+        } else $this->_limit=$limit;
+    }
+
+    function setOrder($order) {
+        $this->_order = $order;
+    }
+
+    function setFilter($query=array()) {
+        $this->_filter = $query;
+    }
+
+    protected function getFilterQuery() {
+        return isset($this->_filter)?" WHERE 1 {$this->_filter[0]}":NULL;
+    }
+
+    protected function getQuery() {
+        $query = '';
+
+        $query.=$this->getFilterQuery();
+
+        if(isset($this->_order)) $query.=" ORDER BY {$this->_order}";
+
+        if(isset($this->_limit)) $query.=" LIMIT ".(isset($this->_start)?"{$this->_start}, ":"").$this->_limit;
+
+        return $query;
+    }
+
+    protected function getQueryParams() {
+        return isset($this->_filter[1])?$this->_filter[1]:array();
     }
 } 

@@ -86,6 +86,7 @@ desired effect
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      <?if($this->user->allowed('admin/fake')):?>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -235,7 +236,7 @@ desired effect
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
-      </div>
+      </div><?endif;?>
     </nav>
   </header>
   
@@ -244,7 +245,7 @@ desired effect
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-
+      <?if($this->user->allowed('admin/fake')):?>
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
@@ -267,11 +268,11 @@ desired effect
             </span>
         </div>
       </form>
-      <!-- /.search form -->
+      <!-- /.search form --><?endif;?>
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
+        <li class="header">__HEADER_COMPONENTS</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
@@ -319,7 +320,7 @@ desired effect
   </div>
   <!-- /.content-wrapper -->
 
-  <?if($this->user->allowed('admin/panel')):?>
+  <?if($this->user->allowed('admin/fake')):?>
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
@@ -416,6 +417,8 @@ desired effect
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+
+<?=$blocks['js'];?>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
