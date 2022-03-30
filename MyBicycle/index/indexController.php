@@ -2,6 +2,8 @@
 
 namespace MyBicycle\index;
 
+use RedBeanPHP\R as R;
+
 Class indexController extends \MyBicycle\Controller {
 
     function indexAction($params) {

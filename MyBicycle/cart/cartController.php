@@ -6,8 +6,6 @@ use Symfony\Component\HttpFoundation\Response;
 use MyWheel\Config;
 use FastRoute\RouteCollector;
 use League\Container\Container;
-use MyWheel\Cart;
-use MyWheel\CartItem;
 use RedBeanPHP\R as R;
 
 class cartController extends \MyBicycle\Controller {
@@ -16,14 +14,18 @@ class cartController extends \MyBicycle\Controller {
 		
         parent::__construct($request, $response, $config, $routes, $container);
 
-        $this->cart =& $_SESSION['cart'];
+        $this->cart =& $this->session['cart'];
 
-		// если хранилище $_SESSION['cart'] не создано, создаем
+		// если хранилище $this->session['cart'] не создано, создаем
 		if(!is_object($this->cart)) $this->cart = $cart;
     }
 
 	function indexAction($params) {
-		$this->data['cart'] = $this->cart;
+
+		$this->data['products'] = $this->cart;
+
+		$this->data['qty']	= $this->cart->qty();
+		$this->data['total']= $this->cart->total();
 
 		$output = $this->renderer->render(
             'cart/cart_index', $this->data
@@ -33,7 +35,7 @@ class cartController extends \MyBicycle\Controller {
 	
 	function addAction() {
 		$product = R::load('product',$this->request->get('id'));
-		$this->cart->add(new CartItem($product->id,$product->price,$this->request->get('qty')));
+		$this->cart->add((object)['id'=>$product->id,'price'=>$product->price,'title'=>$product->title,'qty'=>$this->request->get('qty')]);
 
 	}
 
@@ -47,7 +49,7 @@ class cartController extends \MyBicycle\Controller {
 
 	function editAction() {
 		$product = R::load('product',$this->request->get('id'));
-		$this->cart->edit(new CartItem($product->id,$product->price,$this->request->get('qty')));
+		$this->cart->edit((object)[$product->id,$this->request->get('qty')]);
 	}
 }
 ?>

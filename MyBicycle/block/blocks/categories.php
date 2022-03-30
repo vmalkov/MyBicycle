@@ -1,20 +1,13 @@
 <?
 namespace MyBicycle\block\blocks;
-use League\Container\Container;
+
 use RedBeanPHP\R as R;
 
-class categories implements \MyWheel\Controller {
+class categories extends Controller {
 
-	protected $data=array();
-
-	function __construct(Container $container) {
-		$this->renderer = $container->get('MyBicycle\Templates\Renderer');
-	}
-	function indexAction($data) {
+	function indexAction($params) {
 		$this->data['categories'] = R::find('category');
 	}
-	function __toString() {
-		return $this->renderer->fetch('blocks/categories_block',$this->data);
-	}
+	
 }
 ?>

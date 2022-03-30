@@ -16,6 +16,7 @@
 				
 			</div>
 			<div class="form-group">
+				<input type="text" name="template" value="<?= $block->template;?>" class="form-control" placeholder="__block_template" />
 				<input type="text" name="position" value="<?= $block->position;?>" class="form-control" placeholder="__block_position" />
 			</div>
 			<div class="form-group">

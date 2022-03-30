@@ -1,19 +1,38 @@
-<?if(isset($category)):?>
-<div class="box"><div class="box-body">
-	<table class="table table-bordered">
+<div class="box">
+            
+  <div class="box-body">
+    <table id="example1" class="table table-bordered table-striped">
+      <thead>
 	<tr>
-		<th>__title</th>
+		<th>__category_id</th>
+		<th>__category_title</th>
 		<th>__parent_category</th>
 		<th>__action</th>
 	</tr>
-	<?foreach($category as $item):?>
+	</thead>
+	<tbody>
+	<?while($item=$category->next()):?>
 	<tr>
+		<td><?=$item->id?></td>
 		<td>
 			<a href="category/update/<?= $item->id?>/"><?= $item->title;?></a></td>
 		<td><?= $item->category?$item->category->title:'';?></td>
-		<td class="text-right"><a href="category/delete/<?= $item->id?>/"><i class="fa fa-times" /></a></td>
+		<td class="btn-group">
+        <a href="category/update/<?=$item->id?>/" class="btn bg-purple"><i class="fa fa-edit"></i></a>
+        <a href="category/delete/<?=$item->id?>/" class="btn bg-maroon"><i class="fa fa-remove"></i></a>
+      	</td>
 	</tr>
-	<?endforeach;?>
-	</table>
-</div></div>
-<?endif;?>
+	<?endwhile;?>
+	</tbody>
+      <tfoot>
+      <tr>
+      	<th>__category_id</th>
+        <th>__category_title</th>
+		<th>__parent_category</th>
+		<th>__action</th>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>

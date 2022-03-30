@@ -35,13 +35,14 @@ Class userController extends \MyBicycle\CRUD_Controller {
 
 		if($this->request->getMethod()=='POST') if($user=R::findOne('user','email=?',[$this->request->get('email')])) {
 			if(password_verify($this->request->get('password'),$user->password)) {
-				$user->login();
-				$this->_user = $user;
-				$this->session['user_id'] = $this->_user->id;
-			}
-		} else $this->setMessage(['ok'=>'__no_user_found']);
+				$this->_me->login($user->id);
+				$this->session['user_id'] = $this->_me->id;
+			} else $this->setMessage(['warning'=>'__invalid_password']);
+		} else $this->setMessage(['warning'=>'__no_me_found']);
 
-		if($this->_user->isLogged()) $this->redirect($this->request->getBaseUrl()."/{$this->context}/read/{$this->_user->id}/");
+		if($this->_me->isLogged()) $this->redirect($this->request->getBaseUrl()."/{$this->context}/read/{$this->_me->id}/");
+
+		$this->data['email'] = $this->request->get('email','');
 
 		$output = $this->renderer->render(
             'user/login', $this->data
@@ -50,8 +51,13 @@ Class userController extends \MyBicycle\CRUD_Controller {
 	}
 
 	function logoutAction() {
-		$this->_user->logout();
+		$this->_me->logout();
 		unset($this->session['user_id']);
 	}
+
+	/*function createAction() {
+		var_dump($this->_me);exit;
+		parent::createAction();
+	}*/
 
 }

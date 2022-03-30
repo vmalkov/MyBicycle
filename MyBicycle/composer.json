@@ -13,10 +13,8 @@
     "require": {
         "symfony/templating": "^3.2",
         "gabordemooij/redbean": "dev-master",
-        "ptcong/easyrequest":"^1.0",
         "league/flysystem":"^1.0",
         "league/csv":"^8.0",
-        "panychek/moex":"dev-master",
         "ezimuel/php-secure-session":"^1.1"
     },
     "autoload": {

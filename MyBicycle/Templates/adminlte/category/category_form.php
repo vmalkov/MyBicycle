@@ -2,7 +2,7 @@
 	<form method="post">
 		<div class="box-body">
 			<div class="form-group">
-				<input type="text" name="title" value="<?= $category->title;?>" class="form-control" placeholder="__title" />
+				<input type="text" name="title" value="<?= $category->title;?>" class="form-control" placeholder="__category_title" />
 			</div>
 			<div class="form-group">
 

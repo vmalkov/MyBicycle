@@ -22,7 +22,7 @@ class Renderer extends \MyWheel\Renderer
 
         $this->request = $request;
 
-        $this->tplName = isset($this->config->isAdmin)?$this->config->admin->template:$this->config->site->template;
+        $this->tplName = $this->config->site->template;
 
         $this->tplPath = __APP_PATH. DS . 'Templates'.DS.$this->tplName.DS.'%name%';
     	

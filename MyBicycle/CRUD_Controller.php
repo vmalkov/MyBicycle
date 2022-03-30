@@ -27,9 +27,13 @@ abstract class CRUD_Controller extends Controller {
 	}
 
 	function indexAction($params) {
-        $this->_count = R::count($this->context, $this->getFilterQuery(), $this->getQueryParams());
+        if(!isset($this->_count)) $this->_count = R::count($this->context, $this->getFilterQuery(), $this->getQueryParams());
 
-        $this->{$this->context} = R::findCollection($this->context, $this->getQuery(), $this->getQueryParams());
+        if(!isset($this->{$this->context})) {
+            $this->setOrder('-id');
+
+            $this->{$this->context} = R::findCollection($this->context, $this->getQuery(), $this->getQueryParams());
+        }
 
         $this->data[$this->context]=$this->{$this->context};
 
@@ -113,7 +117,7 @@ abstract class CRUD_Controller extends Controller {
     }
 
     protected function getFilterQuery() {
-        return isset($this->_filter)?" WHERE 1 {$this->_filter[0]}":NULL;
+        return isset($this->_filter)?$this->_filter[0]:NULL;
     }
 
     protected function getQuery() {
@@ -130,5 +134,11 @@ abstract class CRUD_Controller extends Controller {
 
     protected function getQueryParams() {
         return isset($this->_filter[1])?$this->_filter[1]:array();
+    }
+
+    protected function model($name=NULL) {
+        if(!$name) $name=$this->context;
+        return parent::model($name);
+
     }
 } 

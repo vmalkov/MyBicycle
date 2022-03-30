@@ -11,7 +11,7 @@ Class postController extends \MyBicycle\CRUD_Controller {
     function form($action='update') {
         $this->data['categories'] = R::find('category');
         $this->data['users'] = R::find('user');
-        if(!$this->post->user_id) $this->post->user_id = $this->_user->id;
+        if(!$this->post->user_id) $this->post->user_id = $this->_me->id;
 
         if($this->request->getMethod()=='POST') {
             if(!$this->post->date) {
@@ -67,7 +67,7 @@ Class postController extends \MyBicycle\CRUD_Controller {
     }
 
     function indexAction($params) {
-        if(!$this->config->isAdmin) $this->setFilter(['AND status=1']);
+        if(!$this->config->isAdmin) $this->setFilter(['status=?',[1]]);
         parent::indexAction($params);
     }
     

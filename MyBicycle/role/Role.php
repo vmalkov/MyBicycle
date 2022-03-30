@@ -1,7 +1,7 @@
 <?
 namespace MyBicycle\role;
 
-Class Role extends \RedBeanPHP\SimpleModel {
+Class Role extends \MyBicycle\Model {
 
 	
 

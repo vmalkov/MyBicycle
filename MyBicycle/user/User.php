@@ -2,7 +2,9 @@
 
 namespace MyBicycle\user;
 
-Class User extends \RedBeanPHP\SimpleModel {
+use RedBeanPHP\R as R;
+
+Class User extends \MyBicycle\Model {
 
 	private $permissions;
 	private $logged=false;
@@ -47,11 +49,15 @@ Class User extends \RedBeanPHP\SimpleModel {
     	return $this->logged;
     }
 
-    function login() {
+    function login($id) {
+        $this->loadBean(R::load('user',$id));
+
     	$this->logged=true;
     }
 
     function logout() {
+        $this->bean = NULL;
+
     	$this->logged = false;
     }
 

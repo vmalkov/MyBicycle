@@ -12,7 +12,7 @@
       </tr>
       </thead>
       <tbody>
-      <?foreach($user as $usr):?>
+      <?while($usr = $user->next()):?>
       <tr>
       <td><?= $usr->id?></td>
       <td><a href="user/update/<?=$usr->id?>/"><?= $usr->email?></a></td>
@@ -22,7 +22,7 @@
         <a href="user/delete/<?=$usr->id?>/" class="btn bg-maroon"><i class="fa fa-remove"></i></a>
       </td>
       </tr>
-      <?endforeach;?>
+      <?endwhile;?>
       </tbody>
       <tfoot>
       <tr>
